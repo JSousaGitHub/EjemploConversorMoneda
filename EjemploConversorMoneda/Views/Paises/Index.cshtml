@@ -1,0 +1,38 @@
+﻿@model IEnumerable<EjermploConversorMoneda.Entidades.Pais>
+
+@{
+    ViewData["Title"] = "Listado de Países";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Países</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                    <th>@Html.DisplayNameFor(model => model.CodigoISO)</th>
+                    <th>@Html.DisplayNameFor(model => model.Capital)</th>
+                    <th>@Html.DisplayNameFor(model => model.PrefijoTelefonico)</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model) {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Nombre) - ( @Html.DisplayFor(modelItem => item.Id) ) </td>
+                        <td>@Html.DisplayFor(modelItem => item.CodigoISO)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Capital)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PrefijoTelefonico)</td>
+                        <td class="text-center">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm me-2">
+                                <i class="bi bi-info-circle"></i> Detalles
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

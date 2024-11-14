@@ -1,0 +1,35 @@
+﻿@model IEnumerable<EjermploConversorMoneda.Entidades.Moneda>
+
+@{
+    ViewData["Title"] = "Listado de Monedas";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Monedas</h1>
+
+    <section class="row">
+        @foreach(var item in Model) {
+            <article class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <header class="card-header bg-primary bg-opacity-75 text-white" aria-label="Encabezado de la tarjeta de moneda">
+                        <h5 class="mb-0">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                    </header>
+                    <div class="card-body">
+                        <p><strong>Código:</strong> @Html.DisplayFor(modelItem => item.Codigo)</p>
+                        @* <p><strong>Símbolo:</strong> @Html.DisplayFor(modelItem => item.Simbolo)</p> *@
+                    </div>
+                    <footer class="card-footer text-center">
+                        @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm", @ariaLabel = "Ver detalles de la moneda" })
+                    </footer>
+                </div>
+            </article>
+        }
+    </section>
+</div>
+
+@section Scripts {
+    <script>
+        // Aquí puedes agregar scripts específicos para esta vista si es necesario
+    </script>
+}
+

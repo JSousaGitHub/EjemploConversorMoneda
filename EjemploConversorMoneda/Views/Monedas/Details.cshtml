@@ -1,0 +1,33 @@
+﻿@model EjermploConversorMoneda.Entidades.Moneda
+
+@{
+    ViewData["Title"] = "Detalles de la Moneda";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Detalles de la Moneda</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-info text-white" style="background-color: #a3cde5;">
+            <h4 class="mb-0">@Model.Nombre</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">Nombre</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                <dt class="col-sm-4">Código</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Codigo)</dd>
+
+                <dt class="col-sm-4">Símbolo</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Simbolo)</dd>
+            </dl>
+        </div>
+        <div class="card-footer text-center">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left-circle"></i> Volver a la Lista
+            </a>
+        </div>
+    </div>
+</div>
+
