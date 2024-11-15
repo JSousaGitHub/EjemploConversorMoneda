@@ -13,6 +13,11 @@ public class CurrencyConversionViewModel {
     [BindNever]
     public List<Moneda> listaMonedValid { get; set; }
 
+    // Marcador de error
+    public bool error { get; set; }
+
+    // Mensaje del error
+    public string msg { get; set; }
 
     // La cantidad de dinero que el usuario quiere convertir
     [Required(ErrorMessage = "El importe es obligatorio.")]

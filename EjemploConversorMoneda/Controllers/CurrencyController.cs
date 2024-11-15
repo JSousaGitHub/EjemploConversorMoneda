@@ -8,12 +8,10 @@ public class CurrencyController : Controller {
     private readonly CurrencyConverterService _currencyConverterService;
     private readonly ApplicationDbContext _dbContext;
 
-
     public CurrencyController(ApplicationDbContext context, CurrencyConverterService currencyConverterService) {
         _currencyConverterService = currencyConverterService;
         _dbContext = context;
     }
-
 
 
     [HttpGet]
@@ -28,8 +26,12 @@ public class CurrencyController : Controller {
         return View(vm);
     }
 
+
     [HttpPost]
     public async Task<IActionResult> Index(CurrencyConversionViewModel modelConveMoned) {
+
+        modelConveMoned.error = false;
+        modelConveMoned.msg = string.Empty;
 
         // Optiene desde la BD los datos de la Moneda de origen solicitada
         var monedaOrigen = _dbContext.Monedas.FirstOrDefault(m => m.Codigo == modelConveMoned.MonedaOrigen);
@@ -42,12 +44,22 @@ public class CurrencyController : Controller {
         var codigoModenaDestino = monedaDestino.Codigo;
         var importe = modelConveMoned.Importe.ToString();
 
-        // Realiza la consulta respecto a los datos a convertir
-        var resultadoConversion = await _currencyConverterService.ConvertCurrency(importe, codigoModenaOrigen, codigoModenaDestino);
+        try {
 
-        // Recoge los datos de la conversión
-        modelConveMoned.Result = resultadoConversion.ConversionResult;
-        modelConveMoned.RatioConversion = resultadoConversion.ConversionRate;
+            // Realiza la consulta respecto a los datos a convertir
+            var resultadoConversion = await _currencyConverterService.ConvertCurrency(importe, codigoModenaOrigen, codigoModenaDestino);
+
+            // Recoge los datos de la conversión
+            modelConveMoned.Result = resultadoConversion.ConversionResult;
+            modelConveMoned.RatioConversion = resultadoConversion.ConversionRate;
+
+        } catch (Exception ex) {
+
+            modelConveMoned.error = true;
+            modelConveMoned.msg = ex.Message;
+        }
+
+       
 
         modelConveMoned.listaMonedValid = _dbContext.Monedas.ToList();
 

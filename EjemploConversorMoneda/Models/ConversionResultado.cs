@@ -71,4 +71,5 @@ public class ConversionResultado {
     public decimal ConversionResult { get; set; }
 
 
+
 }

@@ -48,6 +48,22 @@
                         <span class="fw-bold fs-5 text-success ms-2">@Model.Result</span>
                     </div>
                 }
+
+                @if (Model.error) {
+
+                    <dialog open class="msg">
+                        <p>⚠ Error:<br>@Model.msg</p>
+                        <form method="dialog">
+                            <button formmethod="dialog">OK</button>
+                        </form>
+                    </dialog>
+
+
+                    <div class="card-footer text-center bg-light py-3">
+                        <span class="text-muted">Se ha producido un error:</span>
+                        <span class="fw-bold fs-5 text-success ms-2">@Model.msg</span>
+                    </div>
+                }
             </div>
         </div>
     </div>
